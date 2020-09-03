@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="row blog-entries element-animate">
-            
+
             <?php
 
             if(isset($_GET['post']))
@@ -25,11 +25,11 @@
             {
                 header("location: index.php");
             }
-            
+
             ?>
-            
+
             <?php
-            
+
             while($row = mysqli_fetch_assoc($result))
             {
                 $post_id = $row['post_id'];
@@ -57,8 +57,8 @@
                     <a class="category mb-5" href="#"><?php echo $post_category; ?></a>
 
                     <div class="post-content-body">
-                        <p><!--?php echo $post_content; ?--></p>                      
-                        
+                        <p><!--?php echo $post_content; ?--></p>
+
                     </div>
 
 
@@ -68,119 +68,74 @@
 
 
             <?php
-                
+
             }
-            
+
             ?>
 
 
 
                     <div class="pt-5">
-                        <h3 class="mb-5">6 Comments</h3>
+                        <h3 class="mb-5">
+                        <?php
+                            (isset($_GET['post'])) ? $post_id = $_GET['post'] : $post_id = 0;
+                            $query = mysqli_query($connection, "SELECT * FROM comments WHERE status='Approved' AND post_id=$post_id");
+                            $num_comments = mysqli_num_rows($query);
+                            echo $num_comments . " comment(s)";
+                        ?>
+                        </h3>
                         <ul class="comment-list">
                             <li class="comment">
                                 <div class="vcard">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
+
                                 </div>
                                 <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
+                                    <?php
+                                        if(isset($_GET['post']))
+                                            {
+                                                $id = $_GET['post'];
+                                                $comment_obj->getApprovedComments($id);
+                                            }
+                                    ?>
                                 </div>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-
-                                <ul class="children">
-                                    <li class="comment">
-                                        <div class="vcard">
-                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3>Jean Doe</h3>
-                                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                            <p><a href="#" class="reply rounded">Reply</a></p>
-                                        </div>
-
-
-                                        <ul class="children">
-                                            <li class="comment">
-                                                <div class="vcard">
-                                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3>Jean Doe</h3>
-                                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                                </div>
-
-                                                <ul class="children">
-                                                    <li class="comment">
-                                                        <div class="vcard">
-                                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                                        </div>
-                                                        <div class="comment-body">
-                                                            <h3>Jean Doe</h3>
-                                                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                            <p><a href="#" class="reply rounded">Reply</a></p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                            </li>
                         </ul>
                         <!-- END comment-list -->
 
+                        <?php
+
+                            if(isset($_GET['post']))
+                            {
+                                $id = $_GET['post'];
+                                if(isset($_POST['comment']))
+                                {
+                                    $name = $_POST['name'];
+                                    $email = $_POST['email'];
+                                    $body = $_POST['body'];
+
+                                    $comment_obj->addComment($id, $name, $email, $body);
+                                }
+                            }
+
+                        ?>
+
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
+                            <form action="single.php?post=<?php echo $post_id; ?>" method="POST" class="p-5 bg-light">
                                 <div class="form-group">
                                     <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <input type="text" name="name" class="form-control" id="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
+                                    <input type="email" name="email" class="form-control" id="email">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="message">Message</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="body" id="message" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Post Comment" class="btn btn-primary">
+                                    <input type="submit" name="comment" value="Post Comment" class="btn btn-primary">
                                 </div>
 
                             </form>

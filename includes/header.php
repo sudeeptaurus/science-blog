@@ -1,5 +1,9 @@
+<?php session_start(); ?>
 <?php include "admin/includes/db.php"; ?>
+<?php include "classes/comment.php"; ?>
 <?php include "function.php"; ?>
+
+<?php $comment_obj = new Comment($connection); ?>
 
 <!doctype html>
 <html lang="en">

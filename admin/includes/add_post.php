@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 $sql = "SELECT * FROM categories";
 $res = mysqli_query($connection, $sql);
 
 ?>
-   
-    <div id="wrapper">
+
+<div id="wrapper">
 
     <!-- Navigation -->
     <?php include 'includes/navigation.php'; ?>
@@ -18,11 +18,11 @@ $res = mysqli_query($connection, $sql);
             <!-- Page Heading -->
             <div class="row">
 
-                
+
 
                 <div class="container">
                     <div class="row">
-                       <h2>Add Posts</h2>
+                        <h2>Add Posts</h2>
                         <div class="col-sm-6">
                             <form action="includes/function.php" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -31,17 +31,17 @@ $res = mysqli_query($connection, $sql);
                                 </div>
                                 <div class="form-group">
                                     <label for="">Post Author</label>
-                                    <input type="text" name="author" placeholder="Post Author" class="form-control">
+                                    <input type="text" value="<?php echo $_SESSION['username']; ?>" name="author" placeholder="Post Author" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Post Category</label>
                                     <select class="form-control" name="category">
-                                       <?php
-                                            while ($row = mysqli_fetch_array($res)) {
-                                                $cat_title = $row['cat_title'];
-                                                echo "<option value='$cat_title'>$cat_title</option>";
-                                            }
-                                        ?>                                       
+                                        <?php
+                                        while ($row = mysqli_fetch_array($res)) {
+                                            $cat_title = $row['cat_title'];
+                                            echo "<option value='$cat_title'>$cat_title</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -50,14 +50,13 @@ $res = mysqli_query($connection, $sql);
                                         <?php
                                         $sql = "SELECT * FROM categories";
                                         $res = mysqli_query($connection, $sql);
-                                        
-                                        while ($row = mysqli_fetch_array($res))
-                                        {
+
+                                        while ($row = mysqli_fetch_array($res)) {
                                             $cat_title = $row['cat_title'];
                                             $cat_id = $row['cat_id'];
                                             echo "<option value='$cat_id'>$cat_id - $cat_title</option>";
                                         }
-                                        ?>  
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -75,7 +74,7 @@ $res = mysqli_query($connection, $sql);
                                     <label for="">Post Image</label>
                                     <input type="file" name="post_image" class="form-control">
                                 </div>
-                                <div class="form-group">                              
+                                <div class="form-group">
                                     <input type="submit" name="publish" value="Publish Post" class="btn btn-primary">
                                 </div>
                             </form>

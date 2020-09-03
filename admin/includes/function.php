@@ -34,13 +34,15 @@ function show_category() {
         $cat_id = $row['cat_id'];
         $cat_title = $row['cat_title'];
 
-        echo '<tr>';
+        echo "<tr>";
         echo "<td>{$cat_id}</td>";
         echo "<td>{$cat_title}</td>";
         echo "<td><a href='categories.php?delete_cat={$cat_id}'>Delete</a></td>";
-        echo '</tr>';
+        echo "</tr>";
     }
 }
+
+//show_category();
 
 function delete_category() {
     global $connection;
@@ -142,6 +144,6 @@ function show_posts()
     }
 }
 
-show_posts();
+//show_posts();
 
 ?>
