@@ -3,7 +3,7 @@
 <?php include "db.php"; ?>
 <?php include "function.php"; ?>
 <?php (isset($_SESSION['userLogged'])) ? $user = $_SESSION['userLogged'] :
-    header("Location: ../cms-admin.php");
+    header("Location: http://localhost:8080/science-blog/cms-admin.php");
 $sql = mysqli_query($connection, "SELECT * FROM users WHERE email='$user'");
 $row = mysqli_fetch_array($sql);
 $username = $row['username'];
@@ -45,5 +45,7 @@ $role = $row['role'];
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script> -->
 
 <body>

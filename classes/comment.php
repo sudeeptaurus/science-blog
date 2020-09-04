@@ -1,7 +1,7 @@
 <?php
 
 (isset($_SESSION['userLogged'])) ? $user = $_SESSION['userLogged'] :
-    header("Location: ../cms-admin.php");
+    header("Location: http://localhost:8080/science-blog/cms-admin.php");
 $sql = mysqli_query($connection, "SELECT * FROM users WHERE email='$user'");
 $row = mysqli_fetch_array($sql);
 $username = $row['username'];
@@ -77,9 +77,9 @@ class Comment
                             <td>$body</td>
                             <td>$status</td>
                             <td>$post_id</td>
-                            <td><a href='#' class='btn btn-primary'>Approve</a></td>
-                            <td><a href='#' class='btn btn-warning'>Unapprove</a></td>
-                            <td><a href='#' class='btn btn-danger'>Delete</a></td>
+                            
+                            <td><a href='comment.php?unp=$id' class='btn btn-warning'>Change Status</a></td>
+                            <td><a href='comment.php?del_com=$id' class='btn btn-danger'>Delete</a></td>
                             </tr>";
             }
         }

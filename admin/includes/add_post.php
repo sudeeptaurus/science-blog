@@ -8,7 +8,7 @@ $res = mysqli_query($connection, $sql);
 <div id="wrapper">
 
     <!-- Navigation -->
-    <?php include 'includes/navigation.php'; ?>
+    <!--?php include 'includes/navigation.php'; ?-->
 
 
     <div id="page-wrapper">
@@ -44,20 +44,10 @@ $res = mysqli_query($connection, $sql);
                                         ?>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Post Category ID</label>
-                                    <select class="form-control" name="category_id">
-                                        <?php
-                                        $sql = "SELECT * FROM categories";
-                                        $res = mysqli_query($connection, $sql);
 
-                                        while ($row = mysqli_fetch_array($res)) {
-                                            $cat_title = $row['cat_title'];
-                                            $cat_id = $row['cat_id'];
-                                            echo "<option value='$cat_id'>$cat_id - $cat_title</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="">Post Content</label>
+                                    <textarea name="content" rows="8" cols="80" id="editor" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Post Tags</label>
@@ -91,20 +81,8 @@ $res = mysqli_query($connection, $sql);
     <!-- /.row -->
 
 </div>
-<!-- /.container-fluid -->
 
-</div>
-<!-- /#page-wrapper -->
 
-</div>
-<!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="bootstrap/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+<script>
+    CKEDITOR.replace('editor');
+</script>

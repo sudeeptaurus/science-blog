@@ -1,4 +1,35 @@
-<?php include 'includes/header.php'; ?>
+<?php
+
+include 'includes/header.php';
+include 'includes/helper.php';
+//delete commnet
+
+if (isset($_GET['del_com']) && $_GET['del_com'] !== '') {
+    $d_id = $_GET['del_com'];
+    if (delete('comments', 'id', $d_id)) {
+        header("Location: comment.php");
+    }
+}
+
+//approve commnet
+
+if (isset($_GET['unp']) && $_GET['unp'] !== '') {
+    $unp = $_GET['unp'];
+    if (confirm($unp)) {
+        header("Location: comment.php");
+    }
+}
+
+//unapprove commnet
+
+if (isset($_GET['app']) && $_GET['app'] !== '') {
+    $app = $_GET['app'];
+    if (confirm($app)) {
+        header("Location: comment.php");
+    }
+}
+
+?>
 
 
 <div id="wrapper">

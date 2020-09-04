@@ -12,77 +12,73 @@
 
             <div class="row blog-entries element-animate">
 
-            <?php
+                <?php
 
-            if(isset($_GET['post']))
-            {
-                $p_id = $_GET['post'];
+                if (isset($_GET['post'])) {
+                    $p_id = $_GET['post'];
 
-                $query = "SELECT * FROM posts WHERE post_id = $p_id";
-                $result = mysqli_query($connection, $query);
-            }
-            else
-            {
-                header("location: index.php");
-            }
+                    $query = "SELECT * FROM posts WHERE post_id = $p_id";
+                    $result = mysqli_query($connection, $query);
+                } else {
+                    header("location: index.php");
+                }
 
-            ?>
+                ?>
 
-            <?php
+                <?php
 
-            while($row = mysqli_fetch_assoc($result))
-            {
-                $post_id = $row['post_id'];
-                $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
-                $post_category = $row['post_category'];
-                $post_category_id = $row['post_category_id'];
-                //        $post_content = $row['post_content'];
-                $post_tags = $row['post_tags'];
-                $post_status = $row['post_status'];
-                $post_image = $row['post_image'];
-                $date = $row['post_date'];
-                $post_views = $row['post_views'];
-                $post_comment_count =$row['post_comment_count'];
-            ?>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $post_id = $row['post_id'];
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_category = $row['post_category'];
+                    $post_category_id = $row['post_category_id'];
+                    $post_content = $row['post_content'];
+                    $post_tags = $row['post_tags'];
+                    $post_status = $row['post_status'];
+                    $post_image = $row['post_image'];
+                    $date = $row['post_date'];
+                    $post_views = $row['post_views'];
+                    $post_comment_count = $row['post_comment_count'];
+                ?>
 
-                <div class="col-md-12 col-lg-8 main-content">
-                    <img src="admin/images/<?php echo $post_image; ?>" alt="Image" class="img-fluid mb-5">
-                    <div class="post-meta">
-                        <span class="author mr-2"><?php echo $post_author; ?></span>&bullet;
-                        <span class="mr-2"><?php echo $date; ?></span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span><?php echo $post_comment_count; ?></span>
-                    </div>
-                    <h1 class="mb-4"><?php echo $post_title; ?></h1>
-                    <a class="category mb-5" href="#"><?php echo $post_category; ?></a>
+                    <div class="col-md-12 col-lg-8 main-content">
+                        <img src="admin/images/<?php echo $post_image; ?>" alt="Image" class="img-fluid mb-5">
+                        <div class="post-meta">
+                            <span class="author mr-2"><?php echo $post_author; ?></span>&bullet;
+                            <span class="mr-2"><?php echo $date; ?></span> &bullet;
+                            <span class="ml-2"><span class="fa fa-comments"></span><?php echo $post_comment_count; ?></span>
+                        </div>
+                        <h1 class="mb-4"><?php echo $post_title; ?></h1>
+                        <a class="category mb-5" href="#"><?php echo $post_category; ?></a>
 
-                    <div class="post-content-body">
-                        <p><!--?php echo $post_content; ?--></p>
+                        <div class="post-content-body">
+                            <p><?php echo $post_content; ?></p>
 
-                    </div>
+                        </div>
 
 
-                    <div class="pt-5">
-                        <p>Categories: <a href="#"><?php echo $post_category; ?></a> Tags: <a href="#"><?php echo "#" . $post_tags; ?></a></p>
-                    </div>
+                        <div class="pt-5">
+                            <p>Categories: <a href="#"><?php echo $post_category; ?></a> Tags: <a href="#"><?php echo "#" . $post_tags; ?></a></p>
+                        </div>
 
 
-            <?php
+                    <?php
 
-            }
+                }
 
-            ?>
+                    ?>
 
 
 
                     <div class="pt-5">
                         <h3 class="mb-5">
-                        <?php
+                            <?php
                             (isset($_GET['post'])) ? $post_id = $_GET['post'] : $post_id = 0;
                             $query = mysqli_query($connection, "SELECT * FROM comments WHERE status='Approved' AND post_id=$post_id");
                             $num_comments = mysqli_num_rows($query);
                             echo $num_comments . " comment(s)";
-                        ?>
+                            ?>
                         </h3>
                         <ul class="comment-list">
                             <li class="comment">
@@ -91,11 +87,10 @@
                                 </div>
                                 <div class="comment-body">
                                     <?php
-                                        if(isset($_GET['post']))
-                                            {
-                                                $id = $_GET['post'];
-                                                $comment_obj->getApprovedComments($id);
-                                            }
+                                    if (isset($_GET['post'])) {
+                                        $id = $_GET['post'];
+                                        $comment_obj->getApprovedComments($id);
+                                    }
                                     ?>
                                 </div>
                         </ul>
@@ -103,18 +98,16 @@
 
                         <?php
 
-                            if(isset($_GET['post']))
-                            {
-                                $id = $_GET['post'];
-                                if(isset($_POST['comment']))
-                                {
-                                    $name = $_POST['name'];
-                                    $email = $_POST['email'];
-                                    $body = $_POST['body'];
+                        if (isset($_GET['post'])) {
+                            $id = $_GET['post'];
+                            if (isset($_POST['comment'])) {
+                                $name = $_POST['name'];
+                                $email = $_POST['email'];
+                                $body = $_POST['body'];
 
-                                    $comment_obj->addComment($id, $name, $email, $body);
-                                }
+                                $comment_obj->addComment($id, $name, $email, $body);
                             }
+                        }
 
                         ?>
 
@@ -142,33 +135,33 @@
                         </div>
                     </div>
 
-                </div>
-
-                <!-- END main-content -->
-
-                <div class="col-md-12 col-lg-4 sidebar">
-                    <div class="sidebar-box search-form-wrap">
-                        <form action="search.php" class="search-form" method="post">
-                            <div class="form-group">
-                                <span class="icon fa fa-search"></span>
-                                <input type="text" name="search" class="form-control" id="s" placeholder="Type a keyword and hit enter">
-                            </div>
-                        </form>
                     </div>
-                    <!-- END sidebar-box -->
 
-                    <!-- END sidebar-box -->
-                    <?php include 'includes/sidebar.php'; ?>
-                    <!-- END sidebar-box -->
+                    <!-- END main-content -->
 
-                    <?php include 'includes/category.php'; ?>
+                    <div class="col-md-12 col-lg-4 sidebar">
+                        <div class="sidebar-box search-form-wrap">
+                            <form action="search.php" class="search-form" method="post">
+                                <div class="form-group">
+                                    <span class="icon fa fa-search"></span>
+                                    <input type="text" name="search" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END sidebar-box -->
 
-                    <!-- END sidebar-box -->
+                        <!-- END sidebar-box -->
+                        <?php include 'includes/sidebar.php'; ?>
+                        <!-- END sidebar-box -->
 
-                    <?php include 'includes/tags.php'; ?>
+                        <?php include 'includes/category.php'; ?>
 
-                </div>
-                <!-- END sidebar -->
+                        <!-- END sidebar-box -->
+
+                        <?php include 'includes/tags.php'; ?>
+
+                    </div>
+                    <!-- END sidebar -->
 
             </div>
         </div>

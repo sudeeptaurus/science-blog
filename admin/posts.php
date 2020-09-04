@@ -1,6 +1,37 @@
-<?php 
+<?php
 
 include 'includes/header.php';
+include 'includes/helper.php';
+
+// delete post
+if (isset($_GET['delete_post']) && $_GET['delete_post'] !== '') {
+    $dlt = $_GET['delete_post'];
+    if (delete('posts', 'post_id', $dlt)) {
+        redirect('posts.php?source=');
+    } else {
+        die('FAILED');
+    }
+}
+
+// approve post
+if (isset($_GET['approve_post']) && $_GET['approve_post'] !== '') {
+    $app_id = $_GET['approve_post'];
+    if (modifyStatus($app_id)) {
+        redirect('posts.php?source=');
+    } else {
+        die('FAILED');
+    }
+}
+
+// unapprove post
+if (isset($_GET['unapprove_post']) && $_GET['unapprove_post'] !== '') {
+    $app_id = $_GET['unapprove_post'];
+    if (modifyStatus($app_id)) {
+        redirect('posts.php?source=');
+    } else {
+        die('FAILED');
+    }
+}
 
 ?>
 
@@ -20,32 +51,28 @@ include 'includes/header.php';
                 <h1 class="page-header">
                     Welcome to the Administration Panel
                 </h1>
-         
+
             </div>
         </div>
 
         <?php
-            
-        if (isset($_GET['source']))
-        {
-            $source = $_GET['source'];                            
-        }
-                            switch ($source)
-                            {
-                                case 'add_new':
-                                    include "includes/add_post.php";
-                                    break;
-                                
-                                  case '123':
-                                    echo 123;
-                                    break;
 
-                                 default:
-                                   include "includes/view_post.php";
-                                    break;
-                            }
-        
-        
+        if (isset($_GET['source'])) {
+            $source = $_GET['source'];
+        }
+        switch ($source) {
+            case 'add_new':
+                include "includes/add_post.php";
+                break;
+            case 'edit':
+                include "includes/edit_post.php";
+                break;
+            default:
+                include "includes/view_post.php";
+                break;
+        }
+
+
         ?>
 
 
